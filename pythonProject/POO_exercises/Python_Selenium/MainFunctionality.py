@@ -1,12 +1,21 @@
 
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 class MainFunctionality:
 
-    def __init__(self, driver):
-        self.driver = driver
+    def __init__(self):
+        self.driver = None
+        self.website = None
         self.item = None
+
+    def start_server(self, website):
+        self.website = website
+        s = Service(r'C:/Users/Dim/PycharmProjects/webdrivers/chromedriver.exe')
+        self.driver = webdriver.Chrome(service=s)
+        self.driver.get(self.website)
 
     def xpath_click(self, xpath):
         self.item = self.driver.find_element(By.XPATH, xpath)
@@ -23,7 +32,6 @@ class MainFunctionality:
     def click_and_key(self, xpath, name):
         self.xpath_click(xpath)
         self.item.send_keys(name)
-#        self.item.send_keys(Keys.RETURN)
 
     def key_delete(self, xpath):
         self.xpath_click(xpath)

@@ -7,24 +7,16 @@ from Buttons import Buttons
 from Links import Links
 from Upload_and_Download import Upload_and_Download
 
-from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
-
 class MyClass:
 
-    def __init__(self, website=None):
-        self.website = website
-        s = Service(r'C:/Users/Dim/PycharmProjects/webdrivers/chromedriver.exe')
-        self.driver = webdriver.Chrome(service=s)
-        self.driver.get(self.website)
-        self.item = None
-        self.checkbox = Check_Box(self.driver)
-        self.main = MainFunctionality(self.driver)
-        self.radio = Radio_Button(self.driver)
-        self.tables = Web_Tables(self.driver)
-        self.buttons = Buttons(self.driver)
-        self.links = Links(self.driver)
-        self.upload_and_download = Upload_and_Download(self.driver)
+    def __init__(self):
+        self.main = MainFunctionality()
+        self.checkbox = Check_Box(self.main.driver)
+        self.radio = Radio_Button(self.main.driver)
+        self.tables = Web_Tables(self.main.driver)
+        self.buttons = Buttons(self.main.driver)
+        self.links = Links(self.main.driver)
+        self.upload_and_download = Upload_and_Download(self.main.driver)
 
 
 demoq_element_xpath = '//div[@class="category-cards"]//div[@class="card mt-4 top-card"]//div[@class="card-body"]//h5[text()="Elements"]'
@@ -47,7 +39,8 @@ submit_id = 'submit'
 #//*[@id="tree-node"]/ol/li/span/button/svg/path
 # //div[@class="check-box-tree-wrapper"]//span[@class="rct-text"]
 
-d = MyClass('https://demoqa.com')
+d = MyClass()
+d.main.start_server('https://demoqa.com')
 # d.main.xpath_click(demoq_element_xpath)
 
 ## Exercitiu A  - CHECK BOX
